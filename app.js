@@ -151,16 +151,13 @@ const screens = {
 
 const btnStart = document.getElementById('btn-start');
 const btnRestart = document.getElementById('btn-restart');
-const soundToggle = document.getElementById('sound-toggle');
 const situationText = document.getElementById('situation-text');
 const option1Btn = document.getElementById('option-1');
 const option2Btn = document.getElementById('option-2');
 const option1Text = document.getElementById('option-1-text');
 const option2Text = document.getElementById('option-2-text');
-const questionProgress = document.getElementById('question-progress');
 const scoreCounter = document.getElementById('score-counter');
 const comboCounter = document.getElementById('combo-counter');
-const progressBar = document.getElementById('progress-bar');
 const slapOverlay = document.getElementById('slap-overlay');
 const quizCardContainer = document.getElementById('quiz-card-container');
 
@@ -216,9 +213,7 @@ function loadQuestion() {
     
     const question = currentQuestions[currentIndex];
     
-    // Update progress HUD
-    questionProgress.textContent = `${currentIndex + 1} / ${currentQuestions.length}`;
-    progressBar.style.width = `${(currentIndex / currentQuestions.length) * 100}%`;
+
     
     // Set situation text
     situationText.textContent = question.situation;
@@ -411,11 +406,7 @@ option2Btn.addEventListener('click', (e) => {
     handleAnswer(option2Btn, e);
 });
 
-soundToggle.addEventListener('click', () => {
-    soundEnabled = !soundEnabled;
-    soundToggle.querySelector('.sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
-    soundToggle.style.borderColor = soundEnabled ? 'var(--neon-red)' : 'rgba(255, 255, 255, 0.1)';
-});
+
 
 // Setup click sound initialiser for user activation check
 document.addEventListener('click', () => {
