@@ -134,7 +134,7 @@ const RANKS = [
     { min: 100, max: 100, title: "Légende de la gifle divine", desc: "Le score parfait. Un dieu vivant de la mornifle. Chuck Norris a demandé ton autographe. Absolument légendaire." }
 ];
 
-let currentQuestions = [];
+let questionIds = [];
 let currentIndex = 0;
 let score = 0;
 let combo = 0;
@@ -192,7 +192,9 @@ function shuffleArray(array) {
 // ================= GAME SETUP & PLAYING =================
 function initGame() {
     initAudio();
-    currentQuestions = shuffleArray(window.quizQuestions);
+    // Build array of IDs 1 to 100 and shuffle them
+    const ids = Array.from({ length: 100 }, (_, i) => i + 1);
+    questionIds = shuffleArray(ids);
     currentIndex = 0;
     score = 0;
     combo = 0;
@@ -206,46 +208,63 @@ function initGame() {
     showScreen('game');
 }
 
-function loadQuestion() {
-    if (currentIndex >= currentQuestions.length) {
+async function loadQuestion() {
+    if (currentIndex >= questionIds.length) {
         endGame();
         return;
     }
     
-    const question = currentQuestions[currentIndex];
+    const questionId = questionIds[currentIndex];
     
     // Update progress HUD
-    questionProgress.textContent = `${currentIndex + 1} / ${currentQuestions.length}`;
-    progressBar.style.width = `${(currentIndex / currentQuestions.length) * 100}%`;
+    questionProgress.textContent = `${currentIndex + 1} / ${questionIds.length}`;
+    progressBar.style.width = `${(currentIndex / questionIds.length) * 100}%`;
     
-    // Set situation text
-    situationText.textContent = question.situation;
-    
-    // Randomize button positions (Option 1 vs Option 2)
-    const isOption1Correct = Math.random() < 0.5;
-    
-    // Clear slapped/clicked states
-    quizCardContainer.className = '';
-    option1Btn.className = 'option-btn card-inner';
-    option2Btn.className = 'option-btn card-inner';
-    
-    if (isOption1Correct) {
-        option1Text.textContent = "Une bonne branlée";
-        option2Text.textContent = question.alternative;
+    // Fetch question JSON dynamically
+    try {
+        const response = await fetch(`questions/q_${questionId}.json`);
+        if (!response.ok) {
+            throw new Error(`Failed to load question ${questionId}`);
+        }
+        const question = await response.json();
         
-        option1Btn.dataset.correct = "true";
-        option2Btn.dataset.correct = "false";
-    } else {
-        option1Text.textContent = question.alternative;
-        option2Text.textContent = "Une bonne branlée";
+        // Set situation text
+        situationText.textContent = question.situation;
         
-        option1Btn.dataset.correct = "false";
-        option2Btn.dataset.correct = "true";
+        // Randomize button positions (Option 1 vs Option 2)
+        const isOption1Correct = Math.random() < 0.5;
+        
+        // Clear slapped/clicked states
+        quizCardContainer.className = '';
+        option1Btn.className = 'option-btn card-inner';
+        option2Btn.className = 'option-btn card-inner';
+        
+        if (isOption1Correct) {
+            option1Text.textContent = "Une bonne branlée";
+            option2Text.textContent = question.alternative;
+            
+            option1Btn.dataset.correct = "true";
+            option2Btn.dataset.correct = "false";
+        } else {
+            option1Text.textContent = question.alternative;
+            option2Text.textContent = "Une bonne branlée";
+            
+            option1Btn.dataset.correct = "false";
+            option2Btn.dataset.correct = "true";
+        }
+        
+        // Enable button interactions
+        option1Btn.disabled = false;
+        option2Btn.disabled = false;
+        
+    } catch (err) {
+        console.error(err);
+        situationText.textContent = "Erreur de chargement de la question. Passage à la suivante...";
+        setTimeout(() => {
+            currentIndex++;
+            loadQuestion();
+        }, 1500);
     }
-    
-    // Enable button interactions
-    option1Btn.disabled = false;
-    option2Btn.disabled = false;
 }
 
 function handleAnswer(clickedButton, event) {
@@ -374,7 +393,7 @@ function endGame() {
     playWinFanfare();
     
     finalScore.textContent = score;
-    statSwipes.textContent = currentQuestions.length;
+    statSwipes.textContent = questionIds.length;
     statMaxCombo.textContent = `X${maxCombo}`;
     
     // Determine rank
