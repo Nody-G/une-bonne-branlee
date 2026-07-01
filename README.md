@@ -1,4 +1,4 @@
-# 🔴 Une Bonne Branlée - Le Quizz
+# 🔴 Une bonne branlée !
 
 > Marre des influenceurs TikTok sur l'escalator ? Des donneurs de leçons condescendants à la pause midi ? Des kékés du tuning sous tes fenêtres à 3h du matin ? 
 > 
