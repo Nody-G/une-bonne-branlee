@@ -2,6 +2,7 @@
   "name": "une-bonne-branlee",
   "private": true,
   "version": "1.0.0",
+  "description": "Une bonne branlée ! : Un quizz satirique interactif de 100 questions cinglantes face aux relous et stéréotypes du quotidien. Avec effets de baffe sonores et visuels (Web Audio API & animations d'impact).",
   "type": "module",
   "scripts": {
     "dev": "vite",
