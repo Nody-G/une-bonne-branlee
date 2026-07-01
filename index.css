@@ -143,50 +143,30 @@ body {
 
 /* ================= HOME SCREEN STYLING ================= */
 #screen-home {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.home-content {
+    background: 
+        linear-gradient(to top, rgba(8, 9, 13, 0.9) 0%, rgba(8, 9, 13, 0.45) 40%, transparent 100%),
+        url('homepage.jpg') no-repeat center center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    gap: 30px;
-    max-width: 460px;
+    padding-bottom: 12vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: opacity var(--transition-slow);
 }
 
-.warning-badge {
-    background: #ff2a5f;
-    color: #fff;
-    padding: 6px 14px;
-    font-size: 11px;
-    font-weight: 900;
-    border-radius: 4px;
-    letter-spacing: 2px;
-    box-shadow: 0 0 15px rgba(255, 42, 95, 0.6);
-    animation: pulse-border 2s infinite ease-in-out;
-}
-
-.home-banner-container {
-    width: 100%;
-    max-width: 440px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 2px solid var(--neon-red);
-    box-shadow: var(--glow-red);
-    transform: rotate(-1deg);
-    transition: transform var(--transition-slow);
-}
-
-.home-banner-container:hover {
-    transform: rotate(0deg) scale(1.02);
-}
-
-.home-banner {
-    width: 100%;
-    height: auto;
-    display: block;
+#screen-home.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 999;
+    transform: none;
 }
 
 .app-description {
