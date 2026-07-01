@@ -1,3 +1,5 @@
+import { quizQuestions } from './questions.js';
+
 // ================= AUDIO SYNTHESIS ENGINE =================
 let audioCtx = null;
 let soundEnabled = true;
@@ -192,7 +194,7 @@ function shuffleArray(array) {
 // ================= GAME SETUP & PLAYING =================
 function initGame() {
     initAudio();
-    currentQuestions = shuffleArray(window.quizQuestions);
+    currentQuestions = shuffleArray(quizQuestions);
     currentIndex = 0;
     score = 0;
     combo = 0;

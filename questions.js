@@ -1,4 +1,4 @@
-const quizQuestions = [
+export const quizQuestions = [
   {
     id: 1,
     situation: "Un influenceur de 19 ans avec une coupe de cheveux en forme de pinceau à rechampir et un jogging fluo bloque l'escalator du métro en heure de pointe pour filmer sa douzième danse TikTok ridicule. Il ose te lancer un regard noir parce que ta présence 'gâche sa vidéo'.",
@@ -501,5 +501,4 @@ const quizQuestions = [
   }
 ];
 
-// Rendre les questions disponibles globalement
-window.quizQuestions = quizQuestions;
+
