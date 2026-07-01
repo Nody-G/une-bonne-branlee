@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Grand Quizz de la Bonne Branlée</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Google Fonts for impactful styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main App Container -->
+    <main id="app-container">
+        <!-- Background decorative grid/effects -->
+        <div class="bg-glow"></div>
+        <div class="bg-grid"></div>
+
+        <!-- Mute/Sound Toggle -->
+        <button id="sound-toggle" class="sound-btn" aria-label="Activer/Désactiver le son">
+            <span class="sound-icon">🔊</span>
+        </button>
+
+        <!-- ================= HOME SCREEN ================= -->
+        <section id="screen-home" class="screen active">
+            <div class="home-content">
+                <h1 class="main-title">
+                    <span class="title-main">UNE BONNE BRANLÉE</span>
+                </h1>
+                <button id="btn-start" class="btn-primary">JOUER</button>
+            </div>
+        </section>
+
+        <!-- ================= GAME SCREEN ================= -->
+        <section id="screen-game" class="screen">
+            <div class="game-header">
+                <!-- Progress & Score info -->
+                <div class="hud-item progress-hud">
+                    <span class="hud-label">SITUATION</span>
+                    <span id="question-progress" class="hud-value">1 / 100</span>
+                </div>
+                
+                <div class="hud-item score-hud">
+                    <span class="hud-label">BRANLÉES INFLIGÉES</span>
+                    <span id="score-counter" class="hud-value">0</span>
+                </div>
+
+                <div class="hud-item combo-hud">
+                    <span class="hud-label">COMBO</span>
+                    <span id="combo-counter" class="hud-value-combo">X0</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <!-- Question Card container -->
+            <div id="quiz-card-container">
+                <div class="card-inner">
+                    <div class="card-tag">CIBLE REPÉRÉE</div>
+                    <p id="situation-text" class="situation-description">
+                        Chargement de la situation insupportable...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Answers Layout -->
+            <div class="answers-container">
+                <button id="option-1" class="option-btn card-inner">
+                    <span class="option-letter">A</span>
+                    <span class="option-text" id="option-1-text">Option A</span>
+                </button>
+                <button id="option-2" class="option-btn card-inner">
+                    <span class="option-letter">B</span>
+                    <span class="option-text" id="option-2-text">Option B</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= RESULT SCREEN ================= -->
+        <section id="screen-result" class="screen">
+            <div class="result-content">
+                <h2 class="result-title">VERDICT DES PHALANGES</h2>
+                
+                <div class="score-display">
+                    <span class="final-score-number" id="final-score">85</span>
+                    <span class="final-score-max">/ 100</span>
+                </div>
+                
+                <div class="rank-badge" id="rank-badge">TERREUR DES TRANSPORTS</div>
+                
+                <p id="result-evaluation" class="result-evaluation">
+                    Tu es une véritable machine à baffes. Le syndicat des relous a peur de toi, et c'est très bien comme ça.
+                </p>
+
+                <div class="stats-summary">
+                    <div class="stat-box">
+                        <span class="stat-val" id="stat-swipes">100</span>
+                        <span class="stat-lbl">Relous croisés</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val" id="stat-max-combo">X0</span>
+                        <span class="stat-lbl">Max Combo</span>
+                    </div>
+                </div>
+
+                <button id="btn-restart" class="btn-primary">REDISTRIBUER DE LA JUSTICE</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Slap overlay container for particle generation -->
+    <div id="slap-overlay"></div>
+
+    <!-- Script imports -->
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
